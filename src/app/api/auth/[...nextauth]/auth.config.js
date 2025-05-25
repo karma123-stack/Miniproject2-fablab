@@ -66,16 +66,12 @@ export const authOptions = {
   },
   pages: {
     signIn: '/login',
-    error: '/login', // Redirect to login page on error
+    error: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
-  // Add additional security measures
   jwt: {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  // Prevent multiple failed login attempts
-  maxAge: 30 * 24 * 60 * 60, // 30 days
-  // Add CSRF protection
   useSecureCookies: process.env.NODE_ENV === 'production',
-}; 
+};
