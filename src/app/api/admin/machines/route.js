@@ -10,10 +10,7 @@ export async function GET() {
     return NextResponse.json(machines);
   } catch (error) {
     console.error('Error fetching machines:', error);
-    return NextResponse.json(
-      { error: 'Error fetching machines' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Error fetching machines' }, { status: 500 });
   }
 }
 
@@ -25,10 +22,7 @@ export async function POST(req) {
 
     // Validate required fields
     if (!name || !image || !description || !capabilities || !requirements || !icon) {
-      return NextResponse.json(
-        { error: 'All fields are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
     await connectToDatabase();
@@ -39,15 +33,12 @@ export async function POST(req) {
       capabilities,
       requirements,
       icon,
-      isActive: true
+      isActive: true,
     });
 
     return NextResponse.json(machine, { status: 201 });
   } catch (error) {
     console.error('Error creating machine:', error);
-    return NextResponse.json(
-      { error: 'Error creating machine' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Error creating machine' }, { status: 500 });
   }
-} 
+}

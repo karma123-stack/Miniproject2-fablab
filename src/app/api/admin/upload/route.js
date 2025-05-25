@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
 
-export const runtime = 'nodejs'; // 🔥 important!
+// Ensure this runs in Node.js runtime (not Edge)
+export const runtime = 'nodejs';
 
+// Cloudinary config from environment
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -14,38 +16,41 @@ export async function POST(req) {
     const formData = await req.formData();
     const file = formData.get('file');
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
+    // Validate
+    if (!file || typeof file === 'string') {
+      return NextResponse.json({ error: 'Invalid or missing file' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
+    // Generate filename
     const timestamp = Date.now();
-    const originalName = file.name;
-    const extension = originalName ? originalName.split('.').pop() : 'jpg';
+    const extension = file.name?.split('.').pop() || 'jpg';
     const filename = `machine_${timestamp}.${extension}`;
 
-    const cloudinaryResponse = await new Promise((resolve, reject) => {
-      cloudinary.uploader.upload_stream(
+    // Upload to Cloudinary
+    const uploadResult = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
         {
           folder: 'machines',
           public_id: filename,
           overwrite: true,
         },
         (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
+          if (error) reject(error);
+          else resolve(result);
         }
-      ).end(buffer);
+      );
+      stream.end(buffer);
     });
 
     return NextResponse.json({
-      url: cloudinaryResponse.secure_url,
-      message: 'File uploaded successfully',
+      message: 'Upload successful',
+      url: uploadResult.secure_url,
     });
   } catch (error) {
-    console.error('Error uploading file:', error);
-    return NextResponse.json({ error: 'Error uploading file' }, { status: 500 });
+    console.error('Upload error:', error);
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }
