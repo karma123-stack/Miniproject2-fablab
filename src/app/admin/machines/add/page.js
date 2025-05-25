@@ -72,7 +72,7 @@ export default function AddMachine() {
     try {
       const formDataCloud = new FormData();
       formDataCloud.append('file', file);
-      formDataCloud.append('upload_preset', 'unsigned_preset'); // <-- Replace with your unsigned preset name
+      formDataCloud.append('upload_preset', 'Karmapro'); 
 
       const response = await fetch('https://api.cloudinary.com/v1_1/dqcyxnfqx/upload', {
         method: 'POST',
