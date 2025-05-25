@@ -1,0 +1,502 @@
+/* General styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Top info section */
+.machinesContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #343a40;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.location, .time {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #287acc;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-logo img {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid white;
+  height: 50px;
+  width: auto;
+}
+
+/* Menu container */
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu ul li {
+  display: inline-block;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+.menu ul li a:hover, .menu ul li a.active {
+  background-color: #42a9e4;
+  color: black;
+  border-radius: 5px;
+}
+
+.profileIcon {
+  margin-left: 20px;
+  font-size: 24px;
+}
+
+.profileIcon a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.profileIcon a:hover {
+  color: #42a9e4;
+}
+
+/* Display Machines Section */
+.display_machines {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+}
+
+.display_machines h1 {
+  color: #287acc;
+  font-size: 2em;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* Machines Grid */
+.machinesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.machineCard {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.machineCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.machineImage {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.machineImage img {
+  transition: transform 0.3s ease;
+}
+
+.machineCard:hover .machineImage img {
+  transform: scale(1.05);
+}
+
+.machineDetails {
+  padding: 20px;
+}
+
+.machineDetails h3 {
+  color: #287acc;
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+}
+
+.machineTag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #e8f4ff;
+  color: #287acc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.machineTag i {
+  font-size: 1.1em;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #287acc;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modalHeader h2 {
+  color: #287acc;
+  margin: 15px 0;
+  font-size: 1.8em;
+}
+
+.modalImage {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.modalBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.capabilitiesSection, .requirementsSection {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #287acc;
+}
+
+.capabilitiesSection h3, .requirementsSection h3 {
+  color: #287acc;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.capabilitiesSection ul, .requirementsSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.capabilitiesSection li, .requirementsSection li {
+  margin: 10px 0;
+  line-height: 1.4;
+  color: #444;
+}
+
+.bookingSection {
+  text-align: center;
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.bookButton {
+  background-color: #287acc;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bookButton i {
+  font-size: 1.2em;
+}
+
+.bookButton:hover {
+  background-color: #42a9e4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 122, 204, 0.2);
+}
+
+.bookingNote {
+  color: #666;
+  font-size: 0.9em;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.footerInfo,
+.footerTime {
+  margin: 10px;
+}
+
+.footerBottom {
+  margin-top: 10px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .machinesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .machinesGrid {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .modalBody {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .menu {
+    gap: 15px;
+  }
+
+  .menu ul li a {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  .display_machines h1 {
+    font-size: 1.5em;
+  }
+
+  .info {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Admin Controls */
+.addButton {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px auto;
+  transition: all 0.3s ease;
+}
+
+.addButton:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.adminControls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+
+.editButton, .deleteButton {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editButton {
+  color: #287acc;
+}
+
+.editButton:hover {
+  background-color: #e8f4ff;
+  transform: scale(1.1);
+}
+
+.deleteButton {
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background-color: #ffe8e8;
+  transform: scale(1.1);
+}
+
+/* Loading and Error States */
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2em;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  padding: 40px;
+  color: #dc3545;
+  font-size: 1.2em;
+}
+
+/* Add Machine Card Styles */
+.addMachineCard {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px dashed #287acc;
+  background-color: #f8f9fa;
+}
+
+.addMachineCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(40, 122, 204, 0.2);
+  border-color: #42a9e4;
+  background-color: #e8f4ff;
+}
+
+.addMachineImage {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8f4ff;
+}
+
+.addMachineImage i {
+  font-size: 5rem;
+  color: #287acc;
+  transition: all 0.3s ease;
+}
+
+.addMachineCard:hover .addMachineImage i {
+  transform: scale(1.1);
+  color: #42a9e4;
+}
+
+.addMachineCard .machineDetails h3 {
+  color: #287acc;
+}
+
+.addMachineCard .machineTag {
+  background-color: #e8f4ff;
+  color: #287acc;
+}
+
+.addMachineCard:hover .machineTag {
+  background-color: #d1e9ff;
+} 

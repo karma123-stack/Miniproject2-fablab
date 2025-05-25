@@ -1,102 +1,162 @@
-import Image from "next/image";
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import styles from './Home.module.css';
+import { useAuth } from './context/AuthContext';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { isAuthenticated, user } = useAuth();
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const handleReadMore = (link) => {
+    router.push(link);
+  };
+
+  return (
+    <div>
+      {/* Info Section */}
+      <div className={styles.info}>
+        <div className={styles.location}>
+          <i className="bi bi-geo-alt"></i> Phuentsholing, Bhutan
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className={styles.time}>
+          <i className="bi bi-clock"></i> Monday - Friday: 9 AM to 6 PM
+        </div>
+      </div>
+
+      {/* Navbar */}
+      <div className={styles.navbar}>
+        <div className={styles['navbar-logo']}>
+          <Image src="/fablab_logo.jpg" alt="CST FABLAB Logo" width={150} height={50} />
+        </div>
+        <div className={styles.menu}>
+          <ul>
+            <li><Link href="/" className={styles.active}>Home</Link></li>
+            <li><Link href="/machines">Machines</Link></li>
+            <li><Link href="/products">Products</Link></li>
+            <li><Link href="/events">Events</Link></li>
+          </ul>
+          <div className={styles.profileIcon}>
+            <Link href="/profile">
+              <i className="bi bi-person-circle"></i>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Image Section */}
+      <div className={styles.image}>
+        <Image src="/team.jpg" alt="cover" width={1200} height={600} />
+        {!isAuthenticated() && (
+          <div className={styles.authButtons}>
+            <Link href="/signup">
+              <button className={styles.signupBtn}>Sign Up</button>
+            </Link>
+            <Link href="/login">
+              <button className={styles.loginBtn}>Login</button>
+            </Link>
+          </div>
+        )}
+        <h2>Welcome to CST FabLAB</h2>
+        <p>Innovation & Creativity</p>
+      </div>
+
+      {/* Description */}
+      <div className={styles.description}>
+        <div className={styles.dis}>
+          <h2>What we do at CST FabLab</h2>
+          <p>FabLab CST was inaugurated on 25th August 2022 in the College of Science and Technology, Bhutan...</p>
+          <h2>Vision</h2>
+          <p>&ldquo;Provide Digital Design Tools to Ignite a Culture of Innovation&rdquo;</p>
+          <p>&ldquo;Inspire the Future of Learning and Creating&rdquo;</p>
+        </div>
+        <div className={styles.show}>
+          <Image src="/show.jpg" alt="deco" width={600} height={400} />
+        </div>
+      </div>
+
+      {/* Services */}
+      <div className={styles.services}>
+        <h1>Our Services</h1>
+        <p>Our FabLab student management will guide you to build your ideas to reality</p>
+      </div>
+
+      {/* Card Container */}
+      <div className={styles.cardContainer}>
+        {[
+          { 
+            title: "Custom Prototyping", 
+            img: "/prototypes.jpg", 
+            description: "Bring your ideas to life with our cutting-edge prototyping services.",
+            link: "/services/prototyping"
+          },
+          { 
+            title: "Workshop", 
+            img: "/workshop.jpg", 
+            description: "Unlock your potential with our hands-on workshops.",
+            link: "/services/workshop"
+          },
+          { 
+            title: "Community Services", 
+            img: "/services.jpg", 
+            description: "Our student team helps the community by providing services.",
+            link: "/services/community"
+          },
+          { 
+            title: "Orientation", 
+            img: "/orentation.jpg", 
+            description: "We orient students of our college to join FabLab activities.",
+            link: "/services/orientation"
+          },
+          { 
+            title: "Operating Machines", 
+            img: "/machines.jpg", 
+            description: "Our student team teaches how to operate machines.",
+            link: "/services/machine-training"
+          },
+          { 
+            title: "Products", 
+            img: "/products.jpg", 
+            description: "Our team produces commercial products for lab finances.",
+            link: "/services/products"
+          },
+        ].map((card, index) => (
+          <div key={index} className={styles.card}>
+            <div>
+              <Image src={card.img} alt={card.title} width={300} height={200} />
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+            </div>
+            <button 
+              className={styles.readMoreBtn}
+              onClick={() => handleReadMore(card.link)}
+            >
+              Read More
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <footer className={styles.footer}>
+        <div className={styles.footerContainer}>
+          <div className={styles.footerInfo}>
+            <h3>Contact Us</h3>
+            <p><i className="bi bi-geo-alt"></i> Phuentsholing, Bhutan</p>
+            <p><i className="bi bi-envelope"></i> fablab@cst.edu.bt</p>
+            <p><i className="bi bi-telephone"></i> +975-12345678</p>
+          </div>
+          <div className={styles.footerTime}>
+            <h3>Operating Hours</h3>
+            <p><i className="bi bi-clock"></i> Monday - Friday: 9 AM to 6 PM</p>
+          </div>
+        </div>
+        <div className={styles.footerBottom}>
+          <p>&copy; 2025 CST FabLab. All Rights Reserved.</p>
+        </div>
       </footer>
     </div>
   );

@@ -1,0 +1,361 @@
+/* General styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Top info section */
+.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #343a40; /* Dark background */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-bottom: 0; /* Remove any bottom margin */
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: #287acc; /* Dark background */
+  padding: 15px 20px;
+  display: flex; /* Using flexbox for layout */
+  justify-content: space-between; /* Space between logo and menu */
+  align-items: center; /* Aligns items vertically */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Navbar logo */
+.navbar-logo img {
+  border-radius: 50%; /* Makes the logo circular */
+  overflow: hidden; /* Ensures the image stays within the circular boundary */
+  border: 2px solid white; /* Optional: adds a white border around the circular logo */
+  height: 50px; /* Adjust logo size */
+  width: auto; /* Maintain aspect ratio */
+}
+
+/* Menu container */
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+}
+
+/* Remove default list styles */
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Make navbar items inline */
+.menu ul li {
+  display: inline-block;
+}
+
+/* Style the links */
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.menu ul li a:hover {
+  background-color: #42a9e4; /* Yellow hover effect */
+  color: black;
+  border-radius: 5px;
+}
+
+/* Profile icon styling */
+.profileIcon {
+  margin-left: 20px;
+  font-size: 24px;
+}
+
+.profileIcon a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.profileIcon a:hover {
+  color: #42a9e4;
+}
+
+/* Style for the image section */
+.image {
+  position: relative; /* Ensures the text can be positioned over the image */
+  width: 100%; /* Makes sure the image takes up the full width of the container */
+  overflow: hidden; /* Prevents any image overflow if it exceeds the container's height */
+  margin-top: 0; /* Ensures there is no margin before the image */
+}
+
+.image img {
+  width: 100%; /* Makes the image span the full width of the parent container */
+  height: 500px; /* Sets a fixed height for the image */
+  object-fit: cover; /* Ensures the image is cropped or scaled correctly to fit */
+  margin-top: 0; /* Removes any top margin */
+}
+
+/* Text styling within the image */
+.image h2,
+.image p {
+  position: absolute; /* Position text on top of the image */
+  color: white; /* White text color for contrast */
+  font-size: 2em; /* Larger font size for visibility */
+  text-align: center; /* Center-align the text */
+  left: 50%; /* Center the text horizontally */
+  transform: translateX(-50%); /* Adjust positioning to exactly center the text */
+  z-index: 2; /* Ensure text is above the image */
+}
+
+/* Specific styles for the heading and paragraph */
+.image h2 {
+  top: 65%; /* Adjust vertical position for the heading */
+  font-size: 3em; /* Larger font size for the heading */
+  color: #8bb4dd;
+}
+
+.image p {
+  top: 80%; /* Adjust vertical position for the paragraph */
+  font-size: 1.5em; /* Smaller font size for the paragraph */
+  color: #8bb4dd;
+}
+
+/* Styling the description section */
+.description {
+  display: flex; /* Flexbox to arrange items side by side */
+  justify-content: space-between; /* Space between text and image */
+  align-items: center; /* Vertically aligns the content */
+  padding: 40px; /* Adjusted padding */
+  margin: 20px; /* Margin around the section */
+  background-color: #f8f9fa; /* Light background color */
+  border-radius: 10px; /* Rounded corners for the whole section */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a neat look */
+  flex-direction: row; /* Ensures the text is on the left and image is on the right */
+  gap: 20px; /* Added gap between the text and the image */
+}
+
+/* Style the text section */
+.dis {
+  flex: 1; /* Allow the text section to take the remaining space */
+  font-size: 18px; /* Set font size */
+  color: #333; /* Dark text color for contrast */
+  text-align: left; /* Align text to the left */
+}
+
+/* Style the image section */
+.show {
+  width: 300px; /* Set fixed width for the image */
+  height: 300px; /* Set fixed height for the image */
+  overflow: hidden; /* Hide overflow for the circle shape */
+  border-radius: 50%; /* Make the image circular */
+  border: 5px solid #287acc; /* Optional: add a border around the circle */
+}
+
+/* Ensure the image inside the .show class fits properly */
+.show img {
+  width: 100%; /* Make the image take up full width and height */
+  height: 100%;
+  object-fit: cover; /* Ensure the image fits the circle properly */
+}
+
+/* Additional text styling */
+.dis h2 {
+  font-size: 24px; /* Make the heading slightly larger */
+  font-weight: bold; /* Make the heading bold */
+  color: #378bd3; /* Match heading color with the border of the image */
+  margin-bottom: 10px; /* Add spacing between the heading and the paragraph */
+  text-align: left;
+}
+
+.dis p {
+  font-size: 16px; /* Set the font size of the paragraph */
+  line-height: 1.6; /* Improve readability with line spacing */
+  color: #373232; /* Light gray text for the paragraph */
+  text-align: left; /* Align the paragraph text to the left */
+}
+
+/* Services section */
+.services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  margin: 20px auto;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+}
+
+.services h1 {
+  color: #287acc;
+  margin-bottom: 15px;
+  font-size: 2.5em;
+}
+
+.services p {
+  color: #666;
+  font-size: 1.2em;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Card container with 3x2 grid layout */
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  padding: 50px;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* Styling each card */
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 350px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Styling the card images */
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Card title styling */
+.card h3 {
+  font-size: 1.5em;
+  margin: 15px 0;
+  color: #333;
+}
+
+/* Card description styling */
+.card p {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 20px;
+  padding: 0 15px;
+  line-height: 1.5;
+}
+
+/* Read More button styling */
+.readMoreBtn {
+  background-color: transparent;
+  color: #287acc;
+  border: 2px solid #287acc;
+  padding: 8px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+.readMoreBtn:hover {
+  background-color: #287acc;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(40, 122, 204, 0.2);
+}
+
+/* Hover effect on card - scaling and shadow */
+.card:hover {
+  transform: translateY(-10px); /* Lift the card up */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow effect */
+}
+
+/* Footer styling */
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.footerInfo,
+.footerTime {
+  margin: 10px;
+}
+
+.footerBottom {
+  margin-top: 10px;
+  font-size: 14px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+
+/* Auth buttons container */
+.authButtons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+/* Sign up button styling */
+.signupBtn {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signupBtn:hover {
+  background-color: white;
+  color: #287acc;
+}
+
+/* Login button styling */
+.loginBtn {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: white;
+  color: #287acc;
+}
+
