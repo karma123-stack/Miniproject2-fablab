@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import BookingForm from '../components/BookingForm';
 import styles from './BookMachine.module.css';
 
-export default function BookMachine() {
+function BookMachineInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { isAuthenticated } = useAuth();
@@ -45,4 +45,12 @@ export default function BookMachine() {
       </div>
     </div>
   );
-} 
+}
+
+export default function BookMachine() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BookMachineInner />
+    </Suspense>
+  );
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -10,7 +10,7 @@ import UserOrders from '@/app/components/UserOrders';
 import styles from './Profile.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-export default function Profile() {
+function ProfileInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, isAuthenticated, logout, getUserBookings, cancelBooking } = useAuth();
@@ -241,4 +241,13 @@ export default function Profile() {
       </footer>
     </div>
   );
-} 
+}
+
+// Export with Suspense boundary
+export default function Profile() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProfileInner />
+    </Suspense>
+  );
+}

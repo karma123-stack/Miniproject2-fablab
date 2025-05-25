@@ -1,3 +1,6 @@
+import withPlugins from 'next-compose-plugins';
+import path from 'path'; // <-- Add this import
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -12,7 +15,7 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': require('path').resolve(__dirname, 'src'),
+      '@': path.resolve(process.cwd(), 'src'), // Use process.cwd() for __dirname in ESM
     };
     return config;
   },

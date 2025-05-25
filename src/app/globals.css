@@ -23,7 +23,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  font-family: 'arial', sans-serif;
   line-height: 1.6;
   color: var(--dark-color);
   background-color: var(--light-color);
@@ -284,6 +285,24 @@ button {
 .badge-danger {
   background-color: var(--danger-color);
   color: var(--white-color);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
 }
 
 /* Responsive Design */
