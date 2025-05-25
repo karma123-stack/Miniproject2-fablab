@@ -13,50 +13,36 @@ export async function POST(req) {
     const file = formData.get('file');
 
     if (!file) {
-      return NextResponse.json(
-        { error: 'No file uploaded' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
     }
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create unique filename
     const timestamp = Date.now();
-    const originalName = file.name;
-    const extension = originalName ? originalName.split('.').pop() : 'jpg';
+    const originalName = file.name || 'upload';
+    const extension = originalName.split('.').pop();
     const filename = `machine_${timestamp}.${extension}`;
 
-    // Upload buffer directly to Cloudinary
-    try {
-      const cloudinaryResponse = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-          {
-            folder: 'machines',
-            public_id: filename,
-            overwrite: true,
-          },
-          (error, result) => {
-            if (error) return reject(error);
-            resolve(result);
-          }
-        ).end(buffer);
-      });
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'machines',
+          public_id: filename,
+          overwrite: true,
+        },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
 
-      return NextResponse.json({
-        url: cloudinaryResponse.secure_url,
-        message: 'File uploaded successfully'
-      });
-    } catch (error) {
-      console.error('Cloudinary upload error:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    return NextResponse.json(
-      { error: 'Error uploading file' },
-      { status: 500 }
-    );
+      uploadStream.end(buffer);
+    });
+
+    return NextResponse.json({ url: result.secure_url });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
   }
 }
