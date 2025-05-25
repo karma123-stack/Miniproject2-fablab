@@ -56,13 +56,11 @@ export default function AddMachine() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       setError('Please upload an image file');
       return;
     }
 
-    // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       setError('File size should be less than 5MB');
       return;
@@ -72,25 +70,26 @@ export default function AddMachine() {
     setError('');
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const formDataCloud = new FormData();
+      formDataCloud.append('file', file);
+      formDataCloud.append('upload_preset', 'unsigned_preset'); // <-- Replace with your unsigned preset name
 
-      const response = await fetch('/api/admin/upload', {
+      const response = await fetch('https://api.cloudinary.com/v1_1/dqcyxnfqx/upload', {
         method: 'POST',
-        body: formData,
+        body: formDataCloud,
       });
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Failed to upload image');
+        throw new Error(data.error?.message || 'Failed to upload image');
       }
 
       const data = await response.json();
       setFormData(prev => ({
         ...prev,
-        image: data.url
+        image: data.secure_url
       }));
-      setPreviewUrl(data.url);
+      setPreviewUrl(data.secure_url);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -104,7 +103,6 @@ export default function AddMachine() {
     setLoading(true);
 
     try {
-      // Validate form data
       if (!formData.name || !formData.image || !formData.description) {
         throw new Error('Please fill in all required fields');
       }
@@ -115,9 +113,7 @@ export default function AddMachine() {
 
       const response = await fetch('/api/admin/machines', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
@@ -126,7 +122,6 @@ export default function AddMachine() {
         throw new Error(data.error || 'Failed to add machine');
       }
 
-      // Redirect to machines page on success
       router.push('/machines');
     } catch (err) {
       setError(err.message);
@@ -197,7 +192,7 @@ export default function AddMachine() {
                     alt="Preview"
                     width={200}
                     height={200}
-                    objectFit="cover"
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
               )}
@@ -319,4 +314,4 @@ export default function AddMachine() {
       </div>
     </div>
   );
-} 
+}
